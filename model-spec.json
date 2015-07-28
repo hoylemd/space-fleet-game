@@ -29,54 +29,96 @@
     officers: "bridge_crew",            // senior officers
     crew: "int_scale",                  // number of enlisted crew
     chassis: "chassis",                 // main stucture of vessel
-    structure: "int_scale",             // structural integrity
     systems: ["system"],                // list of systems
     weapons: ["weapon"],                // list of weapons
-    armors: ["armor"],                  // list of armors
+    armours: ["armour"],                // list of armours
     shields: ["shield"],                // list of shields
-    engines: ["engines"],               // list of engines
+    propulsions: ["propulsion"],        // list of propulsion systems
     sensors: ["sensor"],                // list of sensors
     comms: ["comm"],                    // list of command/communication systems
     computers: ["computer"],            // list of central computers
     power_plants: ["power_plant"],      // list of power generating systems
-    cooling: ["cooler"],                // list of heat dissipation systems
-    life_support: ["life_support"],     // list of life support systems
-    special: ["special_system"]         // list of special systems
+    life_supports: ["life_support"],    // list of life support systems
+    specials: ["special_system"]        // list of special systems
   },
   star_system: {                      // star system in space
     base: "game_object",
     coordinates: "coordinates",         // galactic coordinates
     fleets: ["fleet"],                  // list of present fleets
-    center: "celestial",                // celestial bodies at center
-    orbitals: ["orbital"]               // list of orbiting bodies
+    primary: "celestial"                // celestial body at center
   },
-
-/////// refactor below
 
   bridge_crew: {                      // set of vessel's bridge crew.
     commander: "officer",               // leader vessel - morale, loyalty
     pilot: "officer",                   // piloting - navigation
     tactical: "officer",                // targeting - training, security
-    engineer: "officer",                // shield ops, repair, engines - maintainance, repair
+    engineer: "officer",                // shield ops, repair, propulsion systems - maintainance, repair
     science: "officer",                 // countermeasures, scanning - detection, research
     all: ["officer"]                    // list of all officers
   },
   chassis: {                          // main chassis of a vessel
     base: "game_object",
+    vessel: "vessel",
     size_category: "size_category",     // size category of ship (frigate, destroyer, etc)
     material: "material",               // material of main structure, informs mass, cost, stucture
-    base_cost: "int"                    // base cost to build
+    condition: "int_scale",             // structural integrity
   },
   system: {                           // An encapsulated part of a vessel, with crew and functions
     base: "game_object",
     vessel: "vessel",                   // vessel this system is a part of
-    system_spec: "system_spec",         // specification of this system
-    condition: "int",                   // general condition of the system. max calc'd by crew level/spec
-    makedate: "int",                    // startdate of construction
-    crew: ["person"],                   // list of crew assigned to this system
-    officer: "officer",                  // officer assigned to this system
-    converters: ["converter"]           // actual converters in this system
+    spec: "system_spec",                // specification of this system
+    condition: "int",                   // general condition of the system.
+    officer: "officer",                 // officer in charge of this system
   },
+  weapon: {                           // A weapon system
+    base: "system",
+    spec: "weapon_spec"                 // specification
+  },
+  armour: {                           // An armour system
+    base: "system",
+    spec: "armour_spec"                 // specification
+  },
+  shield: {                           // A shield system
+    base: "system",
+    spec: "shield_spec"
+  },
+  propulsion: {
+    base: "system",
+    spec: "propulsion_spec"
+  }
+  comm: {
+    base: "system",
+    spec: "comm_spec"
+  },
+  computer: {
+    base: "system",
+    spec: "computer_spec"
+  },
+  power_plant: {
+    base: "system",
+    spec: "power_plant_spec"
+  },
+  life_support: {
+    base: "system",
+    spec: "life_support_spec"
+  },
+  special_system: {
+    base: "system",
+    spec: "special_system_spec"
+  },
+  coordinates: {
+    x: "int",
+    y: "int"
+  },
+  celestial: {
+    base: "game_object",
+    type: "celestial_type",
+    orbitals: ["celestial"],
+    orbiting: "celestial",
+    colony: "colony"
+  },
+
+
 
   person: {                           // sapient member of a fleet
     base: "game_object",
