@@ -118,7 +118,51 @@
     colony: "colony"
   },
 
-
+  officer: {
+    base: "game_object"
+  },
+  size_category: {
+    base: "game_object"
+  },
+  material: {
+    base: "game_object"
+  },
+  system_spec: {
+    base: "game_object"
+  },
+  weapon_spec: {
+    base: "system_spec"
+  },
+  armour_spec: {
+    base: "system_spec"
+  },
+  shield_spec: {
+    base: "system_spec"
+  },
+  propulsion_spec: {
+    base: "system_spec"
+  },
+  comm_spec: {
+    base: "system_spec"
+  },
+  computer_spec: {
+    base: "system_spec"
+  },
+  power_plant_spec: {
+    base: "system_spec"
+  },
+  life_support_spec: {
+    base: "system_spec"
+  },
+  special_system_spec: {
+    base: "system_spec"
+  },
+  celestial_type: {
+    base: "game_object"
+  },
+  colony: {
+    base: "game_object"
+  },
 
   person: {                           // sapient member of a fleet
     base: "game_object",
