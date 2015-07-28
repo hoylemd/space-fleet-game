@@ -1,0 +1,24 @@
+{
+  species: [
+
+  ],
+  ability: [
+
+  ],
+  rank: [
+
+  ],
+  resource: [
+
+  ],
+
+  skill: [
+
+  ],
+  rank_progression: [
+
+  ],
+  system_type: [
+    storage, weapon, extraction, production, defense, infrastructure, propulsion, support
+  ]
+}
