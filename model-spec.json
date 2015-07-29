@@ -76,17 +76,18 @@
     base: "system",
     spec: "weapon_spec",                // specification
     mods: ["weapon_mod"]                // a list of weapon mods applied to this
+    ammunition: "int_scale"             // max shots/ shots left (for energy weapons this is batteries)
   },
-  projectile_weapon: {                // Projectile weapon systems (missiles, torpedoes, mass drivers)
+  autonomous_weapon: {                // Autonomous weapon systems (missiles, torpedoes, craft)
     base: "weapon",
-    spec: "projectile_weapon_spec",     // informs base HP, base info
+    spec: "autonomous_weapon_spec",     // informs base HP, base info
     material: "material",               // informs hp
     propulsion: "propulsion",           // informs speed / maneuvering
-    ammunition: "int_scale"             // max shots/ shots left
   }
   armour: {                           // An armour system
     base: "system",
-    spec: "armour_spec"                 // specification
+    spec: "armour_spec",                // specification
+    material: "material",
   },
   shield: {                           // A shield system
     base: "system",
@@ -139,7 +140,7 @@
     base: "game_object",
     base_cost: "int",                   // Cost to build a basic vessel of this size
     base_capacity: "int",               // Base vessel equipment capacity
-    base_structure: "int"               // Base structure points
+    base_structure: "int",              // Base structure points
   },
   material: {                         // A material to build a vessel out of
     base: "game_object",
@@ -151,27 +152,30 @@
   },
   system_spec: {                      // specification of a system
     base: "game_object",
-    cost: "int",
-    mass: "int"
+    cost: "int",                        // cost to build this system
+    mass: "int",                        // mass of this system
+    power: "int",                       // passive power draw of this system
+    base_condition: "int"               // base condition for a system
   },
-  weapon_spec: {
+  weapon_spec: {                      // specification of a weapon system
     base: "system_spec",
-    weapon_type: "weapon_type",
-    available_mods: ["weapon_mod"],
-    damage: "int_scale",
-    range_increment: "int",
-    hit_modifier: "float",
-    qualitites: ["weapon_qualities"],
+    weapon_type: "weapon_type",         // type of weapon (kinetic, beam, bolt, missile, special)
+    available_mods: ["weapon_mod"],     // list of available mods for this weapon
+    damage: "int_scale",                // damage range on successful hit
+    range_increment: "int",             // distance for hit penalties
+    hit_modifier: "float",              // flat modifier to hit chance
+    qualitites: ["weapon_qualities"]    // special qualities
   },
-  immediate_weapon_spec: {
+  immediate_weapon_spec: {            // specification of an instant weapon (hit calculated immediately)
     base: "weapon_spec"
-  }
-  projectile_weapon_spec: {
+  },
+  autonomous_weapon_spec: {           // specification for an autonomous weapon (missile, torp, craft etc)
     base: "weapon_spec",
-    base_hp: "int"
-  }
-  armour_spec: {
-    base: "system_spec"
+    base_hp: "int"                      // base hp (anaologous to ship chassis)
+  },
+  armour_spec: {                      // specification for an armour system
+    base: "system_spec",
+    threshhold: "int",                  // maximum damage absorbed per hit
   },
   shield_spec: {
     base: "system_spec"
