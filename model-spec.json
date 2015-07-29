@@ -119,10 +119,16 @@
   },
 
   officer: {
-    base: "game_object"
+    base: "game_object",
+    abilities: ["ability"],
+    level: "int",
+    class: "officer_class"
   },
   size_category: {
-    base: "game_object"
+    base: "game_object",
+    base_cost: "int",
+    base_capacity: "int",
+    base_structure: "int"
   },
   material: {
     base: "game_object"

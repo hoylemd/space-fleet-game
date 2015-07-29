@@ -20,5 +20,8 @@
   ],
   system_type: [
     storage, weapon, extraction, production, defense, infrastructure, propulsion, support
+  ],
+  weapon_type: [
+    kinetic, beam, bolt, missile, craft, special
   ]
 }
