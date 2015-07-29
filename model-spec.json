@@ -87,11 +87,12 @@
   armour: {                           // An armour system
     base: "system",
     spec: "armour_spec",                // specification
-    material: "material",
+    material: "material",               // material, informs threshold, condition, and mass
   },
   shield: {                           // A shield system
     base: "system",
     spec: "shield_spec"
+    field_strength: "int_scale"         // keeps track of field strength
   },
   propulsion: {
     base: "system",
@@ -166,8 +167,9 @@
     hit_modifier: "float",              // flat modifier to hit chance
     qualitites: ["weapon_qualities"]    // special qualities
   },
-  immediate_weapon_spec: {            // specification of an instant weapon (hit calculated immediately)
-    base: "weapon_spec"
+  energy_weapon_spec: {               // specification of an energy weapon (hit calculated immediately)
+    base: "weapon_spec",
+    round_power: "int",                 // power to charge a round
   },
   autonomous_weapon_spec: {           // specification for an autonomous weapon (missile, torp, craft etc)
     base: "weapon_spec",
@@ -177,8 +179,12 @@
     base: "system_spec",
     threshhold: "int",                  // maximum damage absorbed per hit
   },
-  shield_spec: {
-    base: "system_spec"
+  shield_spec: {                      // specification for a shield system
+    base: "system_sp:!iec",
+    reduction: "int",                   // damage subtracted from each hit before absorbed by shield
+    base_field_strength: "int",         // base field strength
+    recharge_rate: "int",               // field strength recharged / turn
+    recharge_power: "int"               // power req'd to recharge recharge_rate per turn
   },
   propulsion_spec: {
     base: "system_spec"
