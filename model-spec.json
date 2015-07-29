@@ -39,7 +39,9 @@
     computers: ["computer"],            // list of central computers
     power_plants: ["power_plant"],      // list of power generating systems
     life_supports: ["life_support"],    // list of life support systems
-    specials: ["special_system"]        // list of special systems
+    specials: ["special_system"],       // list of special systems
+    crew_level: "int",                  // experience level of crew
+    crew_experience: "int"              // xp point total for crew
   },
   star_system: {                      // star system in space
     base: "game_object",
@@ -59,7 +61,7 @@
   chassis: {                          // main chassis of a vessel
     base: "game_object",
     vessel: "vessel",
-    size_category: "size_category",     // size category of ship (frigate, destroyer, etc)
+    size_category: "size_category",     // size category of vessel (frigate, destroyer, etc)
     material: "material",               // material of main structure, informs mass, cost, stucture
     condition: "int_scale",             // structural integrity
   },
@@ -106,32 +108,38 @@
     base: "system",
     spec: "special_system_spec"
   },
-  coordinates: {
+  coordinates: {                      // 2-dimensional coordinates
     x: "int",
     y: "int"
   },
-  celestial: {
+  celestial: {                        // a celestial body (star, planet, etc)
     base: "game_object",
-    type: "celestial_type",
-    orbitals: ["celestial"],
-    orbiting: "celestial",
-    colony: "colony"
+    type: "celestial_type",             // type flag
+    orbitals: ["celestial"],            // list of bodies orbititing this one
+    orbiting: "celestial",              // body this one is orbiting, if any
+    colony: "colony"                    // link to any colony established here
   },
 
-  officer: {
+  officer: {                          // An officer character to provide bonuses to a vessel
     base: "game_object",
-    abilities: ["ability"],
-    level: "int",
-    class: "officer_class"
+    abilities: ["ability"],             // List of abilities
+    level: "int",                       // character level - informs survival chance, cost / turn, hiring cost, and experience until next level-up
+    experience: "int",                  // experience points gained
+    class: "officer_class"              // officer class - informs abilities available / gained on level up
   },
-  size_category: {
+  size_category: {                    // size category for a vessel. lowest-level base source of stats
     base: "game_object",
-    base_cost: "int",
-    base_capacity: "int",
-    base_structure: "int"
+    base_cost: "int",                   // Cost to build a basic vessel of this size
+    base_capacity: "int",               // Base vessel equipment capacity
+    base_structure: "int"               // Base structure points
   },
-  material: {
-    base: "game_object"
+  material: {                         // A material to build a vessel out of
+    base: "game_object",
+    cost_multiplier: "float",           // multiplier on the cost of vessels made with this material
+    capacity_multiplier: "float",       // multiplier on vessel capacity
+    structure_multiplier: "float",      // multiplier on vessel structure points
+    armour_multiplier: "float",         // multiplier on armour points for armour made with this material
+    armour_mass_multiplier: "float"     // multiplier on mass for armour made with this material
   },
   system_spec: {
     base: "game_object"
@@ -169,137 +177,4 @@
   colony: {
     base: "game_object"
   },
-
-  person: {                           // sapient member of a fleet
-    base: "game_object",
-    species: "species",                 // person's species
-    skills: ["skill_level"],            // list of skill levels
-    abilities: ["ability"],             // list of special abilities
-    level: "int",                       // level
-    hp: "int",                          // current hp (max calc'd by level/species/abilities/age/morale
-    birthdate: "int",                   // stardate of birth (1 stardate ~= 1 month, min/max ages for service by species)
-    morale: "int",                      // person's general health/happiness quotient
-    rank: "rank",                       // person's rank
-    system: "system",                   // vessel system assigned to
-  },
-  officer: {                          // special officer role, mapping person to role, provides officer benefits to assigned systems
-    base: "game_object",
-    vessel: "vessel",                   // vessel this officer serves on
-    commander: "officer"                // officer this officer reports to / passes on benefits from
-    person: "person",                   // person assigned
-    systems: ['system'],                // direct commanding systems
-    reports: ['officer'],               // reporting officers, passes on benefits through them
-  },
-  coordinates: {                      // xy values describing spacial coordinates
-    x: "int",
-    y: "int"
-  },
-  resource_amount: {                  // an amount of a raw resource
-    resource: "resource",               // resource accounted
-    amount: "int"                       // amount of resource
-  },
-
-  species: {                          // a sapient species that can crew a vessel
-    base: "game_object",
-    long_name: "string",                // scientific long format name
-    skill_bonuses: ["skill_level"],     // list of racial skill level bonuses
-    abilities: ["abilities"],           // list of racial abilities
-    min_hp: "int",                      // starting hp
-    hp_per_level: "float",              // hp gained per level
-    min_age: "int",                     // minimum stardate age before allowed to serve as crew
-    max_age: "int",                     // retirement age
-    morale_modifier: "float",           // multiplicative modifier on morale
-    biospeed: "float"                   // speed of metabolism etc (how much food/LS needed)
-  },
-  skill_level: {                      // person's level in a given skill
-    skill: "skill",                     // skill described
-    level: "int"                        // level of skill
-  },
-  ability:                            // person's ability, racial or otherwise
-    base: "game_object"                      // ability name
-  },
-  rank: {                             // person's rank
-    base: "game_object"
-    progression: "rank_progression",    // which rank progression this rank belongs to
-    level: "int",                       // which level in the progresion this rank is
-    officer: "boolean"                  // is this an officer rank
-  },
-  system_spec: {                      // pristine specification of a system
-    base: "game_object",
-    system_type: "system_type",         // type of system (storage, weapon, extraction, processing...)
-    condition: "int",                   // base condition
-    costs: ["resource_amount"],         // list of resource costs to build
-    complexity: "int",                  // affects breakdown rate, repeair rate, build rate, defect rate
-    crew: "int",                        // max crew to operate
-    mass: "int",                        // mass minus resources
-    components: ["component"]           // list of components to add to this system
-  },
-  resource: {                         // description of a resource
-    base: "game_object",                // name
-    mass: "float",                      // mass / unit (tonnes)
-    volume: "float",                    // volume / unit (m^3)
-    base_value: "int",                  // base value / unit
-  }
-
-  skill: {                            // skill of a person
-    base: "game_object"
-  },
-  rank_progression: {                 // rank progression path
-    base: "game_object",                // name
-    ranks: ["rank"]                     // list of ranks, in order
-  },
-  system_type: {                      // type of system (storage, weapon, extraction, production, defense, etc
-    base: "game_object"
-  },
-  component: {                        // base class for components of systems
-    base: "game_object"
-  },
-  weapon_component: {                 // weapon components
-    base: "component",
-    base_damage: "int",                 // base points of damage / hit
-    range_increment: "int",             // combat range increment size
-    ammunition: "resource_amount",      // ammunition used per attack
-    hit_modifier: "float",              // multiplicative modifer to chance to hit
-    type: ["weapon_type"]               // weapon types to compare against defenses
-  },
-  defense_component: {                // defense components
-    base: "component",
-    miss_prob: "float",                 // probability that this component will negate an attack entirely
-    ablators: ["resource_amount"],      // resources expended on a defended hit
-    threshold: "int"                    // damage subtracted from defended attack
-    types: ["weapon_types"],            // weapon types this defense is applicable to
-    negate_types: "boolean"             // true if types is a blacklist instead of whitelist
-  },
-  storage_component: {                // resource storage components
-    base: "component",
-    volume: "int",                    // storage volume
-    assigned_resources: ["resource"],   // allowed resources
-    negate_resources: "boolean"         // true if assigned_resources is a blacklist
-  },
-  converter_component: {              // resource converter components
-    base: "component",
-    inputs: ["resource_amount"],        // resources used per batch
-    outputs: ["resource_amounts"],      // resources output per batch
-    combat_mode: "boolean"              // true if this converter is active in combat
-  },
-  control_component: {                // component to control a vessel
-    base: "component",
-    min_crew: "int",                    // minimum number of crew to control
-  },
-  propulsion_component: {             // propulsion component
-    base: "component",
-    propulsion_type: "propulsion_type", // type of propulsion (warp, jump, rocket, thermal, ion, thruster, hyper)
-    interstellar: "boolean"             // true if this is an interstellar drive, false if combat
-    speed: "int",                       // speed in AU/stardate, km/combat turn for dublight, ly/stardate for interstellar
-    agility: "int",                     // rotations / combat turn. dictates how much can turn after of before moving
-    fuel: ["resource_amount"]           // resources used / combat turn, * 200 per stardate sublight, or per lighty year for interstellar
-  },
-  support_component: {                // component for supporting people
-    base: "component",
-    species: "species",                 // species this can support
-    headcount: "int"                    // number of people it can support
-  },
-}
-
-
 
