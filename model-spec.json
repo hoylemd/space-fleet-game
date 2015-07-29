@@ -1,4 +1,5 @@
 {
+  // tier 0
   game_object: {
     name: "string",
     description: "string"
@@ -16,6 +17,7 @@
     increment: "float"
   },
 
+  // tier 1
   fleet: {                            // collection of vessels
     base: "game_object",                // fleet name
     flagship: "vessel",                 // vessel commanding
@@ -23,11 +25,11 @@
     location: "star_system",               // location in space
   },
 
+  // tier 2
   vessel: {                           // vessel
     base: "game_object",
     fleet: "fleet",                     // fleet vessel belongs to
-    officers: "bridge_crew",            // senior officers
-    crew: "int_scale",                  // number of enlisted crew
+    crew: "crew",                       // ship crew
     chassis: "chassis",                 // main stucture of vessel
     systems: ["system"],                // list of systems
     weapons: ["weapon"],                // list of weapons
@@ -40,8 +42,6 @@
     power_plants: ["power_plant"],      // list of power generating systems
     life_supports: ["life_support"],    // list of life support systems
     specials: ["special_system"],       // list of special systems
-    crew_level: "int",                  // experience level of crew
-    crew_experience: "int"              // xp point total for crew
   },
   star_system: {                      // star system in space
     base: "game_object",
@@ -50,14 +50,13 @@
     primary: "celestial"                // celestial body at center
   },
 
-  bridge_crew: {                      // set of vessel's bridge crew.
-    commander: "officer",               // leader vessel - morale, loyalty
-    pilot: "officer",                   // piloting - navigation
-    tactical: "officer",                // targeting - training, security
-    engineer: "officer",                // shield ops, repair, propulsion systems - maintainance, repair
-    science: "officer",                 // countermeasures, scanning - detection, research
-    all: ["officer"]                    // list of all officers
-  },
+  // tier 3
+  crew: {
+    base: "game_object",
+    enlisted: "enlisted_crew",
+    officers: "officer_crew",
+    marines: "marine_crew",
+  }
   chassis: {                          // main chassis of a vessel
     base: "game_object",
     vessel: "vessel",
@@ -130,12 +129,28 @@
     colony: "colony"                    // link to any colony established here
   },
 
-  officer: {                          // An officer character to provide bonuses to a vessel
-    base: "game_object",
-    abilities: ["ability"],             // List of abilities
-    level: "int",                       // character level - informs survival chance, cost / turn, hiring cost, and experience until next level-up
-    experience: "int",                  // experience points gained
-    class: "officer_class"              // officer class - informs abilities available / gained on level up
+  // tier 4
+  officer_crew: {                     // set of vessel's officers crew.
+    commander: "officer",               // leader vessel - morale, loyalty
+    pilot: "officer",                   // piloting - navigation
+    tactical: "officer",                // targeting - training, security, marines
+    engineer: "officer",                // shield ops, repair, propulsion systems - maintainance, repair
+    science: "officer",                 // countermeasures, scanning - detection, research
+    all: ["officer"]                    // list of all officers
+  },
+  learner: {                          // something that can level up
+    level: "int",                       // current level
+    experience: "int"                   // curent experience point total
+  }
+  enlisted_crew: {                    // enlisted crew members
+    base: "learner"
+    headcount: "int_scale",             // actual count of crew - max is life support max, minus officers, minus marines
+  },
+  marine_crew: {                      // personal combat members
+    base: "enlisted_crew",
+    gear: ["marine_gear"],              // all gear
+    weapons: ["marine_weapons"],        // weapons
+    armour: ["marine_armour"],          // armour (no shields on marines)
   },
   size_category: {                    // size category for a vessel. lowest-level base source of stats
     base: "game_object",
@@ -180,20 +195,28 @@
     threshhold: "int",                  // maximum damage absorbed per hit
   },
   shield_spec: {                      // specification for a shield system
-    base: "system_sp:!iec",
+    base: "system_spec",
     reduction: "int",                   // damage subtracted from each hit before absorbed by shield
     base_field_strength: "int",         // base field strength
     recharge_rate: "int",               // field strength recharged / turn
     recharge_power: "int"               // power req'd to recharge recharge_rate per turn
   },
-  propulsion_spec: {
-    base: "system_spec"
+  propulsion_spec: {                  // propulsion system, best will always be used
+    base: "system_spec",
+    ftl_speed: "int",                   // interstellar speed
+    sublight_speed: "int",              // combat and pursuit speed
+    signature: "int"                    // measure of how visible these engines are
   },
-  comm_spec: {
-    base: "system_spec"
+  comm_spec: {                        // command and communication system, only best used
+    base: "system_spec",
+    range: "int",                       // interstellar distance to detect fleets/communicate in real time
+    command_modifier: "float"           // modifier on officer's command skill
   },
-  computer_spec: {
-    base: "system_spec"
+  computer_spec: {                    // computer system - helps with attacks, and can replace crew
+    base: "system_spec",
+    hit_modifier: "float",              // to hit modifier for all attacks
+    crew_equivalent: "int",             // how many crew members this computer is worth
+    experience_level: "int";            // what crew level this computer is worth
   },
   power_plant_spec: {
     base: "system_spec"
@@ -210,4 +233,16 @@
   colony: {
     base: "game_object"
   },
+
+  // tier 5
+  officer: {                          // An officer character to provide bonuses to a vessel
+    base: "learner",
+    abilities: ["ability"],             // List of abilities
+    class: "officer_class"              // officer class - informs abilities available / gained on level up
+  },
+  marine_gear: {
+    base: "game_object",
+    type: "gear_type",
+  }
+
 
