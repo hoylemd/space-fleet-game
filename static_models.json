@@ -1,27 +1,24 @@
 {
-  species: [
-
-  ],
-  ability: [
-
-  ],
-  rank: [
-
-  ],
-  resource: [
-
-  ],
-
-  skill: [
-
-  ],
-  rank_progression: [
-
-  ],
   system_type: [
     weapon, armour, shield, propulsion, comm, computer, power_plant, life_support, special
   ],
   weapon_type: [
     kinetic, beam, bolt, missile, craft, special
+  ],
+  celestial_type: [
+
   ]
+  resource: [
+
+  ]
+  ability: [
+
+  ],
+  officer_class: [
+
+  ].
+  gear_type: [
+
+  ],
+
 }

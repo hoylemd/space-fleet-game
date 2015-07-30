@@ -64,6 +64,7 @@
     size_category: "size_category",     // size category of vessel (frigate, destroyer, etc)
     material: "material",               // material of main structure, informs mass, cost, stucture
     condition: "int_scale",             // structural integrity
+    graphic: "graphic"                  // graphic to draw this vessel chassis
   },
   system: {                           // An encapsulated part of a vessel, with crew and functions
     base: "game_object",
@@ -78,10 +79,10 @@
     capacity: "int_scale"               // current storage state
   }
   weapon: {                           // A weapon system
-    base: "system",
+    base: "container_system",
     spec: "weapon_spec",                // specification
     mods: ["weapon_mod"]                // a list of weapon mods applied to this
-    ammunition: "int_scale"             // max shots/ shots left (for energy weapons this is batteries)
+    // capacity: max shots/ shots left (for energy weapons this is batteries)
   },
   autonomous_weapon: {                // Autonomous weapon systems (missiles, torpedoes, craft)
     base: "weapon",
@@ -95,9 +96,9 @@
     material: "material",               // material, informs threshold, condition, and mass
   },
   shield: {                           // A shield system
-    base: "system",
+    base: "container_system",
     spec: "shield_spec"
-    field_strength: "int_scale"         // keeps track of field strength
+    // capacity: keeps track of field strength
   },
   propulsion: {
     base: "system",
@@ -112,17 +113,19 @@
     spec: "computer_spec"
   },
   power_plant: {
-    base: "system",
+    base: "container_system",
     spec: "power_plant_spec",
-    reserve: "int_scale"              // power in reserve
+    // capacity: power in reserve
   },
   fuel_storage: {
-    base: "system",
+    base: "container_system",
     spec: "fuel_storage_spec",
+    // capacity: fuel stored
   }
   life_support: {
-    base: "system",
+    base: "container_system",
     spec: "life_support_spec"
+    // capacity: crew supportable
   },
   special_system: {
     base: "system",
@@ -152,7 +155,7 @@
   learner: {                          // something that can level up
     level: "int",                       // current level
     experience: "int"                   // curent experience point total
-  }
+  },
   enlisted_crew: {                    // enlisted crew members
     base: "learner"
     headcount: "int_scale",             // actual count of crew - max is life support max, minus officers, minus marines
@@ -160,8 +163,8 @@
   marine_crew: {                      // personal combat members
     base: "enlisted_crew",
     gear: ["marine_gear"],              // all gear
-    weapons: ["marine_weapons"],        // weapons
-    armour: ["marine_armour"],          // armour (no shields on marines)
+    // offense: 5 + level + officer bonus + gear bonuses
+    // defense: level + officer bonus + gear bonuses
   },
   size_category: {                    // size category for a vessel. lowest-level base source of stats
     base: "game_object",
@@ -177,6 +180,11 @@
     armour_multiplier: "float",         // multiplier on armour points for armour made with this material
     armour_mass_multiplier: "float"     // multiplier on mass for armour made with this material
   },
+  graphic: {                          // data structure for a graphics texture
+    asset_path: "string",               // path to the asset
+    height: "int",                      // height in pixels
+    width: "int"                        // width in pixels
+  }
   system_spec: {                      // specification of a system
     base: "game_object",
     cost: "int",                        // cost to build this system
@@ -187,15 +195,19 @@
   container_system_spec: {            // specification of a system that contains a resource
     base: "system_spec",
     max_capacity: "int"                 // maximum capacity
+    resource: "resource"                // resource contained
   }
   weapon_spec: {                      // specification of a weapon system
-    base: "system_spec",
+    base: "container_system_spec",
     weapon_type: "weapon_type",         // type of weapon (kinetic, beam, bolt, missile, special)
     available_mods: ["weapon_mod"],     // list of available mods for this weapon
     damage: "int_scale",                // damage range on successful hit
     range_increment: "int",             // distance for hit penalties
     hit_modifier: "float",              // flat modifier to hit chance
-    qualitites: ["weapon_qualities"]    // special qualities
+    qualitites: ["weapon_qualities"],   // special qualities
+    graphic: "graphic"                  // graphic to draw this weapon's projectile
+    // max_capacity: maximum ammunition storage
+    // resource: type of ammunition
   },
   energy_weapon_spec: {               // specification of an energy weapon (hit calculated immediately)
     base: "weapon_spec",
@@ -210,11 +222,12 @@
     threshhold: "int",                  // maximum damage absorbed per hit
   },
   shield_spec: {                      // specification for a shield system
-    base: "system_spec",
+    base: "container_system_spec",
     reduction: "int",                   // damage subtracted from each hit before absorbed by shield
-    base_field_strength: "int",         // base field strength
     recharge_rate: "int",               // field strength recharged / turn
     recharge_power: "int"               // power req'd to recharge recharge_rate per turn
+    // max_capacity: maximum field strength
+    // resource: field strength in damage absorbable
   },
   propulsion_spec: {                  // propulsion system, best will always be used
     base: "system_spec",
@@ -235,14 +248,16 @@
     level: "int";                       // what crew level this computer is worth
   },
   power_plant_spec: {                 // power generation/storage system
-    base: "system_spec",
+    base: "container_system_spec",
     output: "int",                      // amount of power output / unit time
-    reserve_capacity: "int"             // power storage capacity
     fuel: "fuel_draw"                   // fuel used
+    // max_capacity: maximum power storage
+    // resource: power
   },
   life_support_spec: {                // a system for supporting crew members
-    base: "system_spec"
-    crew_capacity: "int"                // maximum crew supportable
+    base: "container_system_spec"
+    // max_capacity: maximum crew supportable
+    // resource: crew
   },
   special_system_spec: {
     base: "system_spec"
@@ -252,6 +267,7 @@
   },
   colony: {
     base: "game_object"
+    // TODO
   },
 
   // tier 5
@@ -260,12 +276,17 @@
     abilities: ["ability"],             // List of abilities
     class: "officer_class"              // officer class - informs abilities available / gained on level up
   },
-  marine_gear: {
+  marine_gear: {                      // a gear type marines on a vessel have equipped
     base: "game_object",
-    type: "gear_type",
+    type: "gear_type",                  // type of gear - marines may only have one of a given type
+    offense_bonus: "int",               // offensive bonus granted
+    defense_bonus: "int"                // defensive bonus granted
   },
-  fuel_draw: {
-    fuel_type: "fuel_type",             // type of fuel for these engines
+  resource: {                         // simple description of a substance
+    base: "game_object"
+  }
+  fuel_draw: {                        // record of the fuel needs of a system
+    fuel_type: "resource",              // type of fuel for these engines
     fuel_consumption: "int",            // amount of fuel used to go one distance unit interstellar
   }
 
@@ -279,7 +300,4 @@
   gear_type: {
     base: "game_object"
   },
-  fuel_type: {
-    base: "game_object"
-  }
 
