@@ -11,14 +11,16 @@
   resource: [
 
   ]
-  ability: [
-
-  ],
   officer_class: [
 
   ].
   gear_type: [
 
   ],
+  ability: [
 
+  ],
+  officer_slot: [
+
+  ]
 }

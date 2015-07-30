@@ -273,7 +273,7 @@
   // tier 5
   officer: {                          // An officer character to provide bonuses to a vessel
     base: "learner",
-    abilities: ["ability"],             // List of abilities
+    abilities: ["ability_level"],             // List of abilities
     class: "officer_class"              // officer class - informs abilities available / gained on level up
   },
   marine_gear: {                      // a gear type marines on a vessel have equipped
@@ -291,13 +291,23 @@
   }
 
   // tier 6
-  ability: {
-    base: "game_object",
+  ability_level: {                    // description of an officer's ability
+    ability: "ability",                 // the ability
+    level: "int"                        // the level
   },
-  officer_class: {
+  officer_class: {                    // a class of officer
     base: "game_object",
+    abilities: ["ability"],             // a list of abailable abilities for this class
+    best_role: "officer_slot"           // recommended officer slot for this class
   },
   gear_type: {
     base: "game_object"
   },
 
+  //tier 7
+  ability: {
+    base: "game_object"
+  },
+  officer_slot: {
+    base: "game_object"
+  }
