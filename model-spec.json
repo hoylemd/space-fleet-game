@@ -150,6 +150,7 @@
     tactical: "officer",                // targeting - training, security, marines
     engineer: "officer",                // shield ops, repair, propulsion systems - maintainance, repair
     science: "officer",                 // countermeasures, scanning - detection, research
+    medical: "officer",                 // crew management/maintenance
     all: ["officer"]                    // list of all officers
   },
   learner: {                          // something that can level up
@@ -256,8 +257,9 @@
   },
   life_support_spec: {                // a system for supporting crew members
     base: "container_system_spec"
-    // max_capacity: maximum crew supportable
-    // resource: crew
+    crew_support: "int"                 // max crew supportable
+    // max_capacity: supplies storable
+    // resource: supplies
   },
   special_system_spec: {
     base: "system_spec"

@@ -1,26 +1,40 @@
 {
   system_type: [
-    weapon, armour, shield, propulsion, comm, computer, power_plant, life_support, special
+    weapon, armour, shield, propulsion, comm, computer, power_plant,
+    fuel_storage, life_support, special
   ],
   weapon_type: [
     kinetic, beam, bolt, missile, craft, special
   ],
   celestial_type: [
-
+    neutron_star, brown_dwarf_star, white_dwarf_star,  main_sequence_star,
+    red_giant_star, blue_giant_star, supergiant_star, black_hole,
+    asteroid_belt, rocky_planet, gas_giant, ice_giant
   ]
   resource: [
-
+    energy, railgun_slug, laser_charge, plasma_charge, longsword_missile,
+    light_fighter, shield_charge, rocket_fuel, exotic_matter, fission_fuel,
+    supplies
   ]
-  officer_class: [
-
-  ].
   gear_type: [
-
+    weapon, armour, pack, defensive, ordnance
   ],
   ability: [
-
+    leader, parent_to_their_crew, inspirational, disciplinarian, tactician,
+    initiative, diplomat, fool,
+    evader, navigatator, fighter_pilot, space_pirate, drifter, spacer,
+    fish_out_of_water,
+    instructor, sharpshooter, missile_maniac, newtons_acolyte, deckfighter,
+    sneaky, hacker, coward,
+    repair, grease_monkey, technician, givin_her_all_shes_got, shieldbearer,
+    inventor, murphys_chosen,
+    astronomer, genius, social_engineer, sentinel, scientist, loremaster,
+    mad_scientist, stubborn,
+    doctor, not_a_blank, cybernetics_expert, entertainer, confidante,
+    miracle_worker, abrasive,
+    heroic, hateful, determinator, anarchist
   ],
   officer_slot: [
-
+    commander, pilot, tactical, engineer, science, medical
   ]
 }
