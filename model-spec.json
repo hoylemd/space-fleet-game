@@ -40,6 +40,7 @@
     comms: ["comm"],                    // list of command/communication systems
     computers: ["computer"],            // list of central computers
     power_plants: ["power_plant"],      // list of power generating systems
+    fuel_storage: ["fuel_storage"],     // list of fuel storage systems
     life_supports: ["life_support"],    // list of life support systems
     specials: ["special_system"],       // list of special systems
   },
@@ -71,6 +72,11 @@
     condition: "int",                   // general condition of the system.
     officer: "officer",                 // officer in charge of this system
   },
+  container_system: {                 // a type of system that can contain a resource
+    base: "system",
+    spec: "container_system_spec",
+    capacity: "int_scale"               // current storage state
+  }
   weapon: {                           // A weapon system
     base: "system",
     spec: "weapon_spec",                // specification
@@ -107,8 +113,13 @@
   },
   power_plant: {
     base: "system",
-    spec: "power_plant_spec"
+    spec: "power_plant_spec",
+    reserve: "int_scale"              // power in reserve
   },
+  fuel_storage: {
+    base: "system",
+    spec: "fuel_storage_spec",
+  }
   life_support: {
     base: "system",
     spec: "life_support_spec"
@@ -173,6 +184,10 @@
     power: "int",                       // passive power draw of this system
     base_condition: "int"               // base condition for a system
   },
+  container_system_spec: {            // specification of a system that contains a resource
+    base: "system_spec",
+    max_capacity: "int"                 // maximum capacity
+  }
   weapon_spec: {                      // specification of a weapon system
     base: "system_spec",
     weapon_type: "weapon_type",         // type of weapon (kinetic, beam, bolt, missile, special)
@@ -204,8 +219,9 @@
   propulsion_spec: {                  // propulsion system, best will always be used
     base: "system_spec",
     ftl_speed: "int",                   // interstellar speed
-    sublight_speed: "int",              // combat and pursuit speed
-    signature: "int"                    // measure of how visible these engines are
+    sublight_speed: "int",              // combat speed
+    signature: "int",                   // measure of how visible these engines are
+    fuel: "fuel_draw"                   // how much and what type of fuel is req'd for this
   },
   comm_spec: {                        // command and communication system, only best used
     base: "system_spec",
@@ -216,13 +232,17 @@
     base: "system_spec",
     hit_modifier: "float",              // to hit modifier for all attacks
     crew_equivalent: "int",             // how many crew members this computer is worth
-    experience_level: "int";            // what crew level this computer is worth
+    level: "int";                       // what crew level this computer is worth
   },
-  power_plant_spec: {
-    base: "system_spec"
+  power_plant_spec: {                 // power generation/storage system
+    base: "system_spec",
+    output: "int",                      // amount of power output / unit time
+    reserve_capacity: "int"             // power storage capacity
+    fuel: "fuel_draw"                   // fuel used
   },
-  life_support_spec: {
+  life_support_spec: {                // a system for supporting crew members
     base: "system_spec"
+    crew_capacity: "int"                // maximum crew supportable
   },
   special_system_spec: {
     base: "system_spec"
@@ -243,6 +263,23 @@
   marine_gear: {
     base: "game_object",
     type: "gear_type",
+  },
+  fuel_draw: {
+    fuel_type: "fuel_type",             // type of fuel for these engines
+    fuel_consumption: "int",            // amount of fuel used to go one distance unit interstellar
   }
 
+  // tier 6
+  ability: {
+    base: "game_object",
+  },
+  officer_class: {
+    base: "game_object",
+  },
+  gear_type: {
+    base: "game_object"
+  },
+  fuel_type: {
+    base: "game_object"
+  }
 
