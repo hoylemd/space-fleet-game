@@ -1,0 +1,14 @@
+game area: map. virtual area determined by fleet sizes. no actual limits, the
+  map only exists for initial placement and coordinate systems
+only allow view scrolling away from active vessels as far as half of the
+  initial map area
+origin for combat area coordinates is the center of the initial map area
+each side has a fleet, and is assigned a map edge randomly
+place each vessel per fleet on the map edge they are assigned
+combat is turn-based, with vessels acting in initiative order
+initiative is determined by vessels' commander's initiative score, or 1 / 4 of
+  their level
+in the case of initiative ties, order of action within group of vessels tied
+  for initiative is determined randomly each turn.
+vessels may fire, move, hack, and board each turn.
+movement distance is determined by propulsion systems and engineer abilities

@@ -160,6 +160,7 @@
   enlisted_crew: {                    // enlisted crew members
     base: "learner"
     headcount: "int_scale",             // actual count of crew - max is life support max, minus officers, minus marines
+    loyalty: "int_scale",               // a measure of this crew's loyalty (min -100, max 100)
   },
   marine_crew: {                      // personal combat members
     base: "enlisted_crew",
