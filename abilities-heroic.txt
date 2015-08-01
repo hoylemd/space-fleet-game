@@ -1,0 +1,59 @@
+leader: every point = x2 crew commandable (with 20 at 1). If an officer has
+  more than their limit of crew under them, the crew operates as 1 level lower.
+  This penalty doubles for every multiple of their crew limit they are
+  exceeding it by.
+  e.g. if an officer has Leader 1, and commands 39 crew at level 3, the crew
+    operates at level 2
+  e.g. officer has Leader 2, and commands 160 crew at level 5 (40 capacity +
+    120 over, which is 3 * their capacity), the crew operates at level 1
+    ( 5 - (2 ^ (3 - 1)) = 4)
+  comm systems can add a multiplier to this. Crews with a negative level suffer
+  large penalties, and lose loyalty equal to their level every stardate.
+parent_to_their_crew: +1 crew loyalty per turn / level.
+inspirational:
+disciplinarian
+tactician
+initiative
+diplomat
+fool
+evader
+navigatator
+fighter_pilot
+space_pirate
+drifter
+spacer
+fish_out_of_water
+instructor
+sharpshooter
+missile_maniac
+newtons_acolyte
+deckfighter
+sneaky
+hacker
+coward
+repair
+grease_monkey
+technician
+givin_her_all_shes_got
+shieldbearer
+inventor
+murphys_chosen
+astronomer
+genius
+social_engineer
+sentinel
+scientist
+loremaster
+mad_scientist
+stubborn
+doctor
+not_a_blank
+cybernetics_expert
+entertainer
+confidante
+miracle_worker
+abrasive
+heroic
+hateful
+determinator
+anarchist

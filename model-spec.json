@@ -145,12 +145,12 @@
 
   // tier 4
   officer_crew: {                     // set of vessel's officers crew.
-    commander: "officer",               // leader vessel - morale, loyalty
-    pilot: "officer",                   // piloting - navigation
-    tactical: "officer",                // targeting - training, security, marines
-    engineer: "officer",                // shield ops, repair, propulsion systems - maintainance, repair
-    science: "officer",                 // countermeasures, scanning - detection, research
-    medical: "officer",                 // crew management/maintenance
+    commander: "officer",               // leadership, diplomacy, logistics,
+    captain: "officer",                 // astrogation, cartography, piloting
+    tactical: "officer",                // heavy weapons, point defense, ordnance,
+    boatswain: "officer",               // fighters, deckfighting, training
+    engineer: "officer",                // repair, maintainance, manufacturing
+    science: "officer",                 // science, medicine, scanning
     all: ["officer"]                    // list of all officers
   },
   learner: {                          // something that can level up
