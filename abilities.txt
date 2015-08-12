@@ -1,4 +1,4 @@
-leadership: Number of crew this officer can competently command.  Cap is
+leadership: Amount of crew this officer can competently command.  Cap is
   determined by table AB.1. An officer can command crew as if they had a
   higher leadership score by trading 1 crew level for 1 level of Leadership.
   there is no limit to how low a crew's level may be pushed this way, so a
@@ -7,24 +7,31 @@ leadership: Number of crew this officer can competently command.  Cap is
   e.g. An officer with a leadership of 5 (400 cap) may command up to 800 crew,
    but the crew will operate as if they were 1 level lower than they are
 
-
   AB.1 Crew caps by leadership
-  | Leadership | Crew cap  |
-  |------------|-----------|
-  | 0          | 0         |
-  | 1          | 25        |
-  | 2          | 50        |
-  | 3          | 100       |
-  | 4          | 200       |
-  | 5          | 400       |
-  | 6          | 800       |
-  | 7          | 1600      |
-  | 8          | 3200      |
-  | 9          | 6400      |
-  | 10         | unlimited |
-  |------------|-----------|
-diplomacy:
-logistics:
+  | Leadership | Name              | Crew cap  | Autonomy |
+  |------------|-------------------|-----------|----------|
+  | 0          | incompetent       | 0         |
+  | 1          | squad leader      | 25        |
+  | 2          | sergeant          | 50        |
+  | 3          |                   | 100       |
+  | 4          |                   | 200       |
+  | 5          |                   | 400       |
+  | 6          | taskmaster        | 800       |
+  | 7          | motivator         | 1600      |
+  | 8          | commander         | 3200      |
+  | 9          | high commander    | 6400      |
+  | 10         | supreme commander | unlimited |
+  |------------|-------------------|-----------|
+
+  Leadership is also used to determine who the commodore of a fleet is. It is
+  simply the officer in the fleet with the highest leadership, and they can be
+  assigned to any slot. Their ship is also automatically the flagship.  Right
+  now, these roles are purely aesthetic, but they might be more meaningful in
+  the future.
+  Lastly, Leadership determines what level of autonomy a vessel may have.
+diplomacy: How skilled this officer is at negotiating, intimidation, and
+  otherwise dealing with others.
+logistics: handles the management of resources. provides
 astrogation:
 cartography:
 piloting:
