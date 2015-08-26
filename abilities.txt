@@ -29,19 +29,65 @@ leadership: Amount of crew this officer can competently command.  Cap is
   now, these roles are purely aesthetic, but they might be more meaningful in
   the future.
   Lastly, Leadership determines what level of autonomy a vessel may have.
-diplomacy: How skilled this officer is at negotiating, intimidation, and
-  otherwise dealing with others.
-logistics: handles the management of resources. provides
-astrogation:
-cartography:
-piloting:
-heavy weapons:
-point defense:
-ordnance:
-fighters:
-deckfighting:
-training:
-repair:
+Diplomacy: How skilled this officer is at negotiating, intimidation, and
+  otherwise dealing with others.  This also affects how the crew of a ship
+  views their officers. High-diplomacy officers are generally liked by their
+  crew, so they tend to be braver, more competent, and happier. this translates
+  into bonuses to combat morale, experience point gain, and non-combat morale.
+  Diplomacy also affects trading - higher scores get better prices
+  TODO: figure out how diplomacy will work
+logistics: handles the management of resources. Low levels do badly at keeping
+  track of resources and needs, and cause a lot of inefficiencies (wasted
+  resources).  middle levels tend to have accurate inventories, and smaller
+  inefficiencies. high levels have entirely accurate inventories, mitigate
+  sudden spikes in supply/demand, and introduce some efficiency optimizations.
+  storage of resources under an officer with high logistics also tend to have
+  higher capacities.  Dangerous resources are also more stable with higher
+  logistics. finally, logistics factors into trading (high score gives higher
+  buyer confidence, so lower prices) and management of freighter fleets
+astrogation: Handles plotting courses to move the fleet around the galaxy.
+  Higher levels plot courses that use less fuel, and arrive sooner. Middle and
+  high levels are capable of plotting faster courses that use more fuel, or
+  slower ones that use less fuel.  In combat, this effects maneuver efficiency.
+piloting: Handles the maneuvering of vessels out of combat.  High levels
+  execute maneuvers with less fuel, and can enter more orbital slots.  High
+  levels are also better at intercepting targets, be it another fleet, an
+  anomaly, or some other celestial body.  Low levels risk damaging or even
+  destroying their vessel when doing some maneuvers.
+maneuvering: Handles the actual execution of maneuvers in combat. Higher levels
+  unlock better maneuvers, and perform existing ones better.  High levels
+  provide passive dodge bonuses. Low levels inflict weapon accuracy penalties,
+  as well as dodge penalties.  High levels also allow for hard-boarding on non
+  immobile targets.
+heavy weapons: Handles the usage of a vessel's primary weapons. These can be
+  spine or turret mounted.  Higher levels gain accuracy, reloading and damage
+  bonuses. some low levels inflict penalties, however. High levels also unlock
+  special firing patterns.  High levels also provide maintenance bonuses
+point defense: Handles the usage of a vessels small defensive weapons.
+  These are always turrent mounted, and are usually mounted as arrays. Higher
+  levels provide bonuses to successfully defend against an attack.  High levels
+  also unlock special firing patterns. High levels may also provide maintenance
+  bonuses.
+ordnance: Handles the usage of a vessel's weapons that employ a more complex
+  and usually slower projectile than Heavy weapons. (missiles, torpedoes,
+  mines).  Higher levels provide accuracy bonuses and defensive bonuses to the
+  weapons themselves, but _not_ damage. High levels also unlock special
+  targetting programs and firing patterns.  High levels also provide bonuses to
+  manufacturing reloads, and unlock advanced modifications to the weapons.
+spacecraft: Handles the management and operation of small autonomous craft that
+  operate out of a vessel (fighters, shuttles, etc).  Higher levels provide,
+  piloting, accuracy, and maintenance bonuses. The level of this ability also
+  directly affects how many spacecraft a vessel may employ at once, just like
+  Leadership for crew.  High levels unlock special maneuvers for these
+  spacecraft.
+deckfighting: Handles the hand-to-hand fighting of marines during a boarding
+  action. Higher levels provide h2h combat bonuses. High levels also unlock
+  special boarding tactics.
+training: Handles the training of crew.  Higher levels provide bonuses to crew
+  experience gain, and provide a slow supply of experience out of combat.
+repair:  Handles the repair of damage to a vessel and it's systems.  Higher
+  levels can repair more damaged systems, and can do it faster, with less
+  resources.  High levels also unlock preventative
 maintainance:
 manufacturing:
 science:
